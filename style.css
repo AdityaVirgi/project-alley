@@ -1,0 +1,152 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #fdfbeb;
+  color: #3b2c2c;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #3b2c2c;
+}
+
+.order-now {
+  background-color: #5c3b24;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.hero {
+  background-color: #1e120e;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 40px;
+}
+
+.hero .buttons {
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: #5c3b24;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #eaeaea;
+  color: #444;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.services {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.service-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-form {
+  background: #fff9e6;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.reservation-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.reservation-form input, .reservation-form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.table-status {
+  background: #f2e5d7;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.floor-plan {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.floor-plan .table {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 20px;
+  font-weight: bold;
+  background: #eee;
+  color: #333;
+}
+
+.floor-plan .available {
+  background-color: #b2f5b2;
+}
+
+.floor-plan .reserved {
+  background-color: #f5b2b2;
+}
+
+.btn-primary {
+  background-color: #6b3e26;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #55301e;
+}
+</style>
+
+
+
