@@ -10,10 +10,10 @@
 <header>
     <div class="logo">☕ Kopi Pesan</div>
     <nav>
-      <a href="index.php">Home</a>
+    <a href="index.php">Home</a>
       <a href="reservation.php">Reservation</a>
       <a href="menu.php">Menu</a>
-      <a href="#">About</a>
+      <a href="about.php">About</a>
       <button class="order-now">Order Now</button>
     </nav>
   </header>
@@ -51,7 +51,7 @@
   <footer>
     <div class="footer-content">
       <div class="logo">☕ Kopi Pesan</div>
-      <p>Serving quality coffee and great experiences since 2022.</p>
+      <p>Serving quality coffee since 2022</p>
     </div>
     <div class="footer-links">
       <h4>Links</h4>
