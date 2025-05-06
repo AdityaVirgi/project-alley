@@ -43,7 +43,7 @@
       <div class="card">
         <h3>☕ View Our Menu</h3>
         <p>Explore our handcrafted coffee drinks and delicious food items.</p>
-        <button class="btn-primary">Get Started</button>
+        <a href="menu.php" class="btn-primary">Get Started</a>
       </div>
     </div>
   </section>

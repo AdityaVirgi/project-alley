@@ -96,7 +96,8 @@ nav a {
   gap: 15px;
 }
 
-.reservation-form input, .reservation-form select {
+.reservation-form input,
+.reservation-form select {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -146,7 +147,6 @@ nav a {
 .btn-primary:hover {
   background-color: #55301e;
 }
-
 
 /* Menu Cards */
 body {
@@ -256,6 +256,7 @@ nav a {
   margin: 0.5rem 0;
 }
 
+/* BUTTON ADD TO CART */
 .quantity-control button {
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
@@ -272,8 +273,63 @@ nav a {
   border: none;
   cursor: pointer;
   margin-top: 0.5rem;
+} /* BUTTON ADDTO CART */
+
+<style > .floor-plan {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin: 20px 0;
 }
 
+.table-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  text-align: center;
+  min-height: 80px;
+}
+
+.table-btn small {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.table-btn.available {
+  background-color: #a8e6cf; /* Warna hijau muda */
+  color: #1b4332;
+}
+
+.table-btn.reserved {
+  background-color: #ffaaa5; /* Warna merah muda */
+  color: #9d0208;
+  cursor: not-allowed;
+}
+
+.table-btn.available:hover {
+  background-color: #8ed1bd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-btn.available:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-btn.selected {
+  background-color: #ffcc5c; /* Warna kuning untuk meja yang dipilih */
+  border: 2px solid #ff9500;
+  color: #000;
+}
 
 footer {
   background-color: #422c1f;
@@ -295,7 +351,3 @@ footer a {
   margin-bottom: 0.3rem;
   text-decoration: none;
 }
-
-
-
-

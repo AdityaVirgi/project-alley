@@ -45,13 +45,22 @@
       </div>
     </div>
 
-    <h3>Floor Plan</h3>
-    <div class="floor-plan">
-      <div class="table available">8<br><small>3 seats</small></div>
-      <div class="table available">11<br><small>3 seats</small></div>
-      <div class="table reserved">5<br><small>3 seats</small></div>
-      <div class="table reserved">2<br><small>2 seats</small></div>
-    </div>
+    <!-- HTML untuk tombol Floor Plan -->
+<h3>Floor Plan</h3>
+<div class="floor-plan">
+  <button type="button" class="table-btn available" data-table-id="8" data-seats="3">
+    8<br><small>3 seats</small>
+  </button>
+  <button type="button" class="table-btn available" data-table-id="11" data-seats="3">
+    11<br><small>3 seats</small>
+  </button>
+  <button type="button" class="table-btn reserved" data-table-id="5" data-seats="3" disabled>
+    5<br><small>3 seats</small>
+  </button>
+  <button type="button" class="table-btn reserved" data-table-id="2" data-seats="2" disabled>
+    2<br><small>2 seats</small>
+  </button>
+</div>
 
     <button type="submit" class="btn-primary">Submit Reservation</button>
   </form>

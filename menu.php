@@ -17,7 +17,8 @@
       <button class="order-now">Order Now</button>
     </nav>
   </header>
-
+  
+   <!-- KATEGORI MAKANAN -->
   <section class="menu-section">
     <h2>Our Menu</h2>
     <div class="menu-filters">
@@ -32,17 +33,46 @@
     <div class="menu-items">
       <!-- Chocolate Croissant -->
       <div class="menu-card pastry">
-        <img src="images/chocolate-croissant.jpg" alt="Chocolate Croissant" />
-        <div class="menu-info">
+          <img src="Chocolate Croissant.jpg" alt="Chocolate Croissant" />
+          <div class="menu-info">
           <h3>Chocolate Croissant</h3>
           <p>Buttery, flaky pastry filled with rich chocolate.</p>
           <p class="price">Rp 22.000,00</p>
+
           <div class="quantity-control">
-            <button>-</button>
-            <span>1</span>
-            <button>+</button>
+            <button type="button" onclick="decreaseQuantity()">-</button>
+            <span id="quantityDisplay">0</span>
+            <button type="button" onclick="increaseQuantity()">+</button>
           </div>
+
+          <form action="add_to_cart.php" method="post">
+          <input type="hidden" name="product_name" value="Chocolate Croissant">
+          <input type="hidden" name="price" value="22000">
+          <input type="hidden" name="quantity" id="quantityInput" value="0">
           <button class="add-to-cart">Add to Cart</button>
+        </form>
+
+
+          <script>
+            let quantity = 0;
+
+            function updateQuantityDisplay() {
+              document.getElementById('quantityDisplay').textContent = quantity;
+              document.getElementById('quantityInput').value = quantity;
+            }
+
+            function increaseQuantity() {
+              quantity++;
+              updateQuantityDisplay();
+            }
+
+            function decreaseQuantity() {
+              if (quantity > 0) {
+                quantity--;
+                updateQuantityDisplay();
+              }
+            }
+          </script>
         </div>
       </div>
 
@@ -53,16 +83,41 @@
           <h3>Almond Croissant</h3>
           <p>Flaky croissant filled with almond cream and topped with sliced almonds.</p>
           <p class="price">Rp 25.000,00</p>
+
           <div class="quantity-control">
-            <button>-</button>
-            <span>1</span>
-            <button>+</button>
+            <button type="button" onclick="changeQuantity(this, -1)">-</button>
+            <span class="quantity-display">0</span>
+            <button type="button" onclick="changeQuantity(this, 1)">+</button>
           </div>
-          <button class="add-to-cart">Add to Cart</button>
+
+          <form action="add_to_cart.php" method="post">
+            <input type="hidden" name="product_name" value="Almond Croissant">
+            <input type="hidden" name="price" value="25000">
+            <input type="hidden" name="quantity" class="quantity-input" value="0">
+            <button class="add-to-cart">Add to Cart</button>
+          </form>
         </div>
       </div>
+
+      <script>
+        function changeQuantity(button, change) {
+          const container = button.closest('.menu-info');
+          const display = container.querySelector('.quantity-display');
+          const input = container.querySelector('.quantity-input');
+
+          let quantity = parseInt(display.textContent);
+          quantity = Math.max(0, quantity + change);
+          display.textContent = quantity;
+          input.value = quantity;
+        }
+      </script>
     </div>
   </section>
+        <form action="add_to_cart.php" method="post">
+        <input type="hidden" name="item_id" value="1">
+        <input type="submit" value="Add to Cart">
+      </form>
+
 
   <footer>
     <div class="footer-content">
