@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kopi Pesan - About</title>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+
 </head>
 <body>
 <?php include '../includes/header.php'; ?>
 
   <!-- taro di css -->
-  <main class="about-section" style="padding: 40px 60px; margin: 40px auto; background: #f9f9f9;">
+  <main class="about-section">
     <h2>About Kopi Pesan</h2>
     <p class="intro">
       Kopi Pesan is a modern coffee shop dedicated to providing a seamless experience for our customers. We combine the artistry of traditional coffee-making with innovative technology to create a unique dining experience.

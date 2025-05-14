@@ -538,9 +538,12 @@ footer a {
 
 .about-section {
   padding: 40px 60px;
-  max-width: 1000px;
   margin: 40px auto;
+  background-color: #f9f9f9;
+  max-width: 1000px; /* opsional biar ga terlalu lebar */
   line-height: 1.8;
-  background-color: #fff; /* opsional, biar kelihatan */
+  border-radius: 10px; /* opsional buat sudut agak membulat */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* opsional buat efek elegan */
 }
+
 
