@@ -4,21 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kopi Pesan - About</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<header>
-    <div class="logo">☕ Kopi Pesan</div>
-    <nav>
-      <a href="index.php">Home</a>
-      <a href="reservation.php">Reservation</a>
-      <a href="menu.php">Menu</a>
-      <a href="about.php">About</a>
-      <button class="order-now">Order Now</button>
-    </nav>
-  </header>
+<?php include '../includes/header.php'; ?>
 
-  <main class="about-section">
+  <!-- taro di css -->
+  <main class="about-section" style="padding: 40px 60px; margin: 40px auto; background: #f9f9f9;">
     <h2>About Kopi Pesan</h2>
     <p class="intro">
       Kopi Pesan is a modern coffee shop dedicated to providing a seamless experience for our customers. We combine the artistry of traditional coffee-making with innovative technology to create a unique dining experience.
@@ -27,7 +19,7 @@
     <section>
       <h3>Our Story</h3>
       <p>
-        Founded in 2022, Kopi Pesan began with a simple idea: to make enjoying quality coffee more convenient.
+        Founded in 2025, Kopi Pesan began with a simple idea: to make enjoying quality coffee more convenient.
         Our founder, a passionate coffee enthusiast, noticed how much time people spent waiting in line at coffee
         shops and wanted to create a solution.
       </p>
@@ -69,29 +61,6 @@
     </section>
   </main>
 
-  <footer>
-    <div class="footer-content">
-      <div class="logo">☕ Kopi Pesan</div>
-      <p>Serving quality coffee since 2022</p>
-    </div>
-    <div class="footer-links">
-      <h4>Links</h4>
-      <a href="index.php">Home</a>
-      <a href="reservation.php">Reservation</a>
-      <a href="menu.php">Menu</a>
-      <a href="#">About</a>
-    </div>
-    <div class="footer-hours">
-      <h4>Opening Hours</h4>
-      <p>Monday - Friday: 7am - 9pm</p>
-      <p>Saturday - Sunday: 8am - 10pm</p>
-    </div>
-    <div class="footer-contact">
-      <h4>Contact</h4>
-      <p>Email: hello@kopipesan.com</p>
-      <p>Phone: +62 123 456 7890</p>
-      <p>Address: Jl. Coffee No. 123, Jakarta</p>
-    </div>
-  </footer>
+  <?php include '../includes/footer.php'; ?>
 </body>
 </html>
