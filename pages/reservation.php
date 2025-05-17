@@ -52,13 +52,16 @@
   <button type="button" class="table-btn reserved" data-table-id="2" data-seats="2" disabled>
     2<br><small>2 seats</small>
   </button>
+  <button type="button" class="table-btn available" data-table-id="7" data-seats="3">
+    7<br><small>7 seats</small>
 </div>
 
-    <button type="submit" class="btn-primary">Submit Reservation</button>
+          <a href="menu.php" class="btn-primary">Reserve a Table</a>
+      </form>
   </form>
 </section>
 
 <?php include '../includes/footer.php'; ?>
 
-</body>
+</body> 
 </html>
