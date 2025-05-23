@@ -10,14 +10,31 @@
 <body>
 <?php include '../includes/header.php'; ?>
 
-  <section class="hero">
-    <h1>alley.jkt</h1>
-    <p>NOTHING CAN SEPARATE YOU FROM ... COFFEE</p>
-    <div class="buttons">
-      <a href="reservation.php" class="btn-primary">Reserve a Table</a>
-      <button class="btn-secondary">Scan QR Code</button>
-    </div>
-  </section>
+      <section class="hero">
+      <img src="../assets/images/alley2.png" class="hero-logo">
+      <div class="buttons">
+        <a href="reservation.php" class="btn-primary">Reserve a Table</a>
+        <a href="reservation.php" class="btn-primary">scan qr code</a>
+      </div>
+    </section>
+
+        <section id="menu" class="menu">
+      <div class="menu-row">
+        <div class="menu-card">
+          <img src="../assets/images/gambar1.png" alt="Menu 1">
+        </div>
+        <div class="menu-card">
+          <img src="../assets/images/gambar2.png" alt="Menu 2">
+        </div>
+        <div class="menu-card">
+          <img src="../assets/images/gambar3.png" alt="Menu 3">
+        </div>
+        <div class="menu-card">
+          <img src="../assets/images/gambar4.png" alt="Menu 4">
+      </div>
+    </section>
+
+
 
   <section class="services">
     <h2>Our Services</h2>
@@ -30,7 +47,7 @@
       <div class="card">
         <h3>🔳 QR Code Ordering</h3>
         <p>Scan the QR code on your table to order directly from your seat.</p>
-        <button class="btn-primary">Get Started</button>
+        <a href="reservation.php" class="btn-primary">Scan QR Code</a>
       </div>
       <div class="card">
         <h3>☕ View Our Menu</h3>

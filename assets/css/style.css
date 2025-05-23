@@ -28,6 +28,54 @@ nav a {
   cursor: pointer;
 }
 
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 7%;
+  background-color: rgba(0, 0, 0, 0.9); /* Lebih pekat */
+  border-bottom: 1px solid #513c28;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Tambahan bayangan */
+}
+
+.navbar .navbar-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  font-style: italic;
+}
+
+.navbar .navbar-logo span {
+  color: #c04c26; /* Ganti var(--primary) dengan warna dominan coffeshop */
+}
+
+.navbar .navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Jarak antar menu */
+}
+
+.navbar .navbar-nav a {
+  color: #fff;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.navbar .navbar-nav a:hover {
+  background-color: #c04c26;
+  color: #fff;
+}
+
+/* Hero Section */
 .hero {
   background-color: #1e120e;
   color: white;
@@ -43,6 +91,41 @@ nav a {
   margin-top: 20px;
 }
 
+/*menu section*/
+.menu {
+  padding: 40px 20px;
+  background-color: #fdfbeb;
+}
+
+.menu-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.menu-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Diperbesar dari 220px */
+  transition: transform 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: scale(1.05);
+}
+
+.menu-card img {
+  width: 100%;
+  height: 260px; /* Ukuran tinggi gambar diperbesar */
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+/* Buttons */
 .btn-primary {
   background-color: #5c3b24;
   color: white;
@@ -61,27 +144,78 @@ nav a {
   cursor: pointer;
 }
 
+/* Services Section */
 .services {
-  padding: 60px 20px;
+  padding: 80px 20px;
+  background: linear-gradient(to bottom, #fdf9f3 0%, #f7efe3 100%);
   text-align: center;
+  position: relative;
+}
+
+.services h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #3e2c1c;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 1px;
 }
 
 .service-cards {
   display: flex;
   justify-content: center;
-  gap: 20px;
   flex-wrap: wrap;
-  margin-top: 30px;
+  gap: 2rem;
 }
 
 .card {
-  background-color: white;
-  padding: 20px;
-  border-radius: 12px;
+  background: linear-gradient(to bottom right, #ffffff, #fef7ef);
+  padding: 28px;
+  border-radius: 20px;
   width: 300px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e4d7c5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #4e3522;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #6e5a48;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.card a.btn-primary {
+  background-color: #a8461e;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 10px rgba(168, 70, 30, 0.3);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card a.btn-primary:hover {
+  background-color: #873816;
+  box-shadow: 0 6px 14px rgba(135, 56, 22, 0.4);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.12);
+}
+
+/*reservation-form*/
 .reservation-form {
   background: #fff9e6;
   padding: 2rem;
@@ -375,7 +509,6 @@ footer a {
   display: inline-block;
 }
 
-
 .menu-header {
   display: flex;
   justify-content: space-between;
@@ -408,7 +541,10 @@ footer a {
 /* Overlay Background */
 .cart-overlay {
   position: fixed;
-  top: 0; right: 0; bottom: 0; left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: flex-end;
@@ -516,7 +652,7 @@ footer a {
 .btn-checkout {
   width: 100%;
   padding: 10px;
-  background: #4CAF50;
+  background: #4caf50;
   border: none;
   color: white;
   margin-bottom: 10px;
@@ -545,5 +681,3 @@ footer a {
   border-radius: 10px; /* opsional buat sudut agak membulat */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* opsional buat efek elegan */
 }
-
-

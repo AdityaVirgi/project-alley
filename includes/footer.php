@@ -1,6 +1,6 @@
 <footer>
     <div class="footer-content">
-      <div class="logo">☕ Kopi Pesan</div>
+      <div class="logo">☕ ALLEY.JKT</div>
       <p>Serving quality coffee since 2025</p>
     </div>
     <div class="footer-links">
