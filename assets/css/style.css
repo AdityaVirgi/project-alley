@@ -221,8 +221,10 @@ nav a {
   padding: 2rem;
   border-radius: 8px;
   max-width: 700px;
-  margin: 0 auto;
+  margin: 80px auto 0 auto; /* margin atas 80px */
 }
+
+
 
 .reservation-form form {
   display: flex;
@@ -548,8 +550,9 @@ footer a {
   background: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: flex-end;
-  z-index: 999;
+  z-index: 9999; /* pastikan lebih tinggi dari navbar */
 }
+
 
 /* Cart Sidebar */
 .cart-popup {

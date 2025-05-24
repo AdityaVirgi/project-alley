@@ -1,67 +1,88 @@
+<?php
+// FILE: reservation.php
+include '../config/koneksi.php';
+include '../includes/suggestion.php';
+
+$guest_count = isset($_POST['people']) ? intval($_POST['people']) : null;
+$auto_tables = [];
+$show_tables = isset($_GET['show_tables']);
+
+if ($guest_count && $guest_count > 6 && $show_tables) {
+    $auto_tables = suggest_table_combination($conn, $guest_count);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Table Reservation</title>
   <link rel="stylesheet" href="../assets/css/style.css">
-
 </head>
 <body>
-  <?php include '../includes/header.php'; ?>
+<?php include '../includes/header.php'; ?>
 
-  <section class="reservation-form">
+<section class="reservation-form">
   <h2>Reserve a Table</h2>
-  <form action="submit_reservation.php" method="POST">
+  <form action="<?= $show_tables ? 'submit_reservation.php' : 'reservation.php?show_tables=1' ?>" method="POST">
+    <label for="name">Your Name</label>
+    <input type="text" name="name" id="name" value="<?= $_POST['guest_name'] ?? '' ?>" required>
+
     <label for="people">Number of People</label>
     <select name="people" id="people" required>
+      <option value="">Select</option>
       <?php for ($i = 1; $i <= 10; $i++): ?>
-        <option value="<?= $i ?>"><?= $i ?></option>
+        <option value="<?= $i ?>" <?= $guest_count == $i ? 'selected' : '' ?>><?= $i ?></option>
       <?php endfor; ?>
     </select>
 
     <label for="date">Date</label>
-    <input type="date" name="date" id="date" required>
+    <input type="date" name="date" id="date" value="<?= $_POST['reservation_date'] ?? '' ?>" required>
 
     <label for="checkin">Check-in Time</label>
-    <input type="time" name="checkin" id="checkin" required>
+    <input type="time" name="checkin" id="checkin" value="<?= $_POST['checkin'] ?? '' ?>" required>
 
     <label for="checkout">Check-out Time</label>
-    <input type="time" name="checkout" id="checkout" required>
+    <input type="time" name="checkout" id="checkout" value="<?= $_POST['checkout'] ?? '' ?>" required>
 
-    <div class="table-status">
-      <p><strong>Tables Available for Exactly <span id="people-count">3</span> People</strong></p>
-      <div>
-        <span style="color: green;">●</span> Available
-        <span style="color: red; margin-left: 20px;">●</span> Reserved
-      </div>
-    </div>
+    <label for="dp">Down Payment (DP)</label>
+    <input type="number" name="dp" id="dp" value="<?= $_POST['dp_amount'] ?? '' ?>" step="0.01" required>
 
-    <!-- HTML untuk tombol Floor Plan -->
-<h3>Floor Plan</h3>
-<div class="floor-plan">
-  <button type="button" class="table-btn available" data-table-id="8" data-seats="3">
-    8<br><small>3 seats</small>
-  </button>
-  <button type="button" class="table-btn available" data-table-id="11" data-seats="3">
-    11<br><small>3 seats</small>
-  </button>
-  <button type="button" class="table-btn reserved" data-table-id="5" data-seats="3" disabled>
-    5<br><small>3 seats</small>
-  </button>
-  <button type="button" class="table-btn reserved" data-table-id="2" data-seats="2" disabled>
-    2<br><small>2 seats</small>
-  </button>
-  <button type="button" class="table-btn available" data-table-id="7" data-seats="3">
-    7<br><small>7 seats</small>
-</div>
+    <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && $guest_count && $show_tables): ?>
+      <?php if ($guest_count > 6 && !empty($auto_tables)): ?>
+        <div class="auto-suggestion">
+          <h4>Auto-Suggested Tables:</h4>
+          <ul>
+            <?php foreach ($auto_tables as $table): ?>
+              <li>Table #<?= $table['id'] ?> (<?= $table['seats'] ?> seats, Zone: <?= $table['zone'] ?>)</li>
+              <input type="hidden" name="table_ids[]" value="<?= $table['id'] ?>">
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php elseif ($guest_count <= 6): ?>
+        <label>Choose Table</label>
+        <div class="floor-plan">
+          <?php
+          $result = mysqli_query($conn, "SELECT * FROM tables WHERE status = 'available' AND seats >= $guest_count ORDER BY seats");
+          while ($table = mysqli_fetch_assoc($result)):
+          ?>
+            <label class="table-btn available">
+              <input type="radio" name="table_ids[]" value="<?= $table['id'] ?>" required>
+              Table <?= $table['id'] ?> (<?= $table['seats'] ?> seats)
+            </label>
+          <?php endwhile; ?>
+        </div>
+      <?php else: ?>
+        <p style="color:red;">No available table combinations found.</p>
+      <?php endif; ?>
+    <?php endif; ?>
 
-          <a href="menu.php" class="btn-primary">Reserve a Table</a>
-      </form>
+    <button type="submit" class="<?= $show_tables ? 'btn-primary' : 'btn-secondary' ?>">
+      <?= $show_tables ? 'Continue to Menu' : 'Check Available Tables' ?>
+    </button>
   </form>
 </section>
 
 <?php include '../includes/footer.php'; ?>
-
-</body> 
+</body>
 </html>

@@ -17,9 +17,12 @@
   <h2>Our Menu</h2>
   <a href="javascript:void(0);" onclick="openCart()" class="cart-icon">
     <img src="../assets/images/cart.png" alt="Cart" />
-    <span class="cart-badge">2</span>
+    <span class="cart-badge">
+  <?= isset($_SESSION['cart']) ? array_sum(array_column($_SESSION['cart'], 'quantity')) : 0 ?>
+</span>
+
   </a>
-</div>
+  </div>
     <div class="menu-filters">
       <button class="filter-btn" data-filter="all">All</button>
       <button class="filter-btn" data-filter="coffee">Coffee</button>
@@ -133,9 +136,6 @@
   </script>
 
 <script>
-  // Ambil jumlah dari localStorage, default 0
-  let cartCount = localStorage.getItem('cartCount') ? parseInt(localStorage.getItem('cartCount')) : 0;
-  updateCartBadge();
 
   // Tambahkan event listener ke semua tombol "Add to Cart"
   document.querySelectorAll(".add-to-cart").forEach(button => {
@@ -172,9 +172,9 @@
   }
 </script>
 
+<?php session_start(); ?>
 <!-- Cart Popup HTML -->
 <div class="cart-overlay" id="cartOverlay" style="display: none;">
-  <!-- Sidebar Cart -->
   <div class="cart-popup">
     <div class="cart-header">
       <h3>Your Order</h3>
@@ -182,31 +182,39 @@
     </div>
 
     <div class="cart-items">
-      <div class="cart-item">
-        <img src="../assets/images/cappuccino.jpg" class="item-img" alt="Cappuccino">
-        <div class="item-info">
-          <p class="item-name">Cappuccino</p>
-          <p class="item-price">Rp 35.000,00 × 4</p>
-          <div class="item-qty">
-            <button class="btn-qty">-</button>
-            <span>4</span>
-            <button class="btn-qty">+</button>
+      <?php if (!empty($_SESSION['cart'])): ?>
+        <?php foreach ($_SESSION['cart'] as $item): ?>
+          <div class="cart-item">
+            <img src="../assets/images/cart.png" class="item-img" alt="<?= htmlspecialchars($item['name']) ?>">
+            <div class="item-info">
+              <p class="item-name"><?= htmlspecialchars($item['name']) ?></p>
+              <p class="item-price">Rp <?= number_format($item['price'], 0, ',', '.') ?> × <?= $item['quantity'] ?></p>
+              <div class="item-qty">
+                <span><?= $item['quantity'] ?></span>
+              </div>
+            </div>
           </div>
-        </div>
-        <button class="item-delete">🗑</button>
-      </div>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <p style="text-align:center;">Cart is empty</p>
+      <?php endif; ?>
     </div>
 
+    <?php if (!empty($_SESSION['cart'])): ?>
     <div class="cart-footer">
-      <div class="total">
-        <span>Total</span>
-        <strong>Rp 140.000,00</strong>
-      </div>
-      <button class="btn-checkout">Checkout</button>
-      <button class="btn-clear">Clear Cart</button>
+      <form action="../pages/checkout.php" method="post">
+        <input type="hidden" name="reservation_id" value="<?= $_GET['reservation_id'] ?? 0 ?>">
+        <button type="submit" class="btn-checkout">Checkout</button>
+      </form>
+
+      <form action="../pages/clear_cart.php" method="post">
+        <button type="submit" class="btn-clear">Clear Cart</button>
+      </form>
     </div>
+    <?php endif; ?>
   </div>
 </div>
+
 
 <!-- Script Buka/Tutup Cart -->
 <script>
@@ -219,5 +227,16 @@
   }
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("header"); // pastikan elemen header pakai tag <header>
+    const section = document.querySelector(".menu-section");
+
+    if (header && section) {
+      const height = header.offsetHeight;
+      section.style.paddingTop = height + 20 + "px"; // Tambah sedikit jarak ekstra
+    }
+  });
+</script>
 </body>
 </html>
