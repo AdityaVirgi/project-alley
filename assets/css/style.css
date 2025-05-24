@@ -681,3 +681,54 @@ footer a {
   border-radius: 10px; /* opsional buat sudut agak membulat */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* opsional buat efek elegan */
 }
+
+.checkout-form-container {
+  max-width: 600px;
+  margin: 120px auto 40px auto;
+  background-color: #fffdf7;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-form h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #5c3b24;
+}
+
+.checkout-form label {
+  font-weight: 600;
+  margin-top: 1rem;
+  color: #3b2c2c;
+}
+
+.checkout-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.checkout-form button.btn-primarys {
+  margin-top: 1.5rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.error-message {
+  color: red;
+  margin-top: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.success-message {
+  color: green;
+  margin-top: 1rem;
+  font-weight: bold;
+  text-align: center;
+}

@@ -8,16 +8,19 @@ $result = mysqli_query($conn, "SELECT * FROM menu");
 while ($row = mysqli_fetch_assoc($result)) {
   $menus[] = $row;
 }
+
+// Ambil cart dari session
+$cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menu - Kopi Pesan</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <?php include '../includes/header.php'; ?>
@@ -58,9 +61,11 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
 
             <form action="add_to_cart.php" method="post">
-              <input type="hidden" name="product_name" value="<?= htmlspecialchars($menu['name']) ?>">
-              <input type="hidden" name="price" value="<?= $menu['price'] ?>">
+              <input type="hidden" name="product_id" value="<?= $menu['id'] ?>">
               <input type="hidden" name="quantity" class="quantity-input" value="0">
+              <?php if (isset($_GET['reservation_id'])): ?>
+                <input type="hidden" name="reservation_id" value="<?= htmlspecialchars($_GET['reservation_id']) ?>">
+              <?php endif; ?>
               <button class="add-to-cart">Add to Cart</button>
             </form>
           </div>
@@ -80,11 +85,7 @@ while ($row = mysqli_fetch_assoc($result)) {
       btn.addEventListener("click", () => {
         const filter = btn.getAttribute("data-filter");
         menuCards.forEach(card => {
-          if (filter === "all" || card.classList.contains(filter)) {
-            card.style.display = "flex";
-          } else {
-            card.style.display = "none";
-          }
+          card.style.display = (filter === "all" || card.classList.contains(filter)) ? "flex" : "none";
         });
       });
     });
@@ -92,25 +93,13 @@ while ($row = mysqli_fetch_assoc($result)) {
 
   <!-- Script add to cart -->
   <script>
-    let cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
-
     document.querySelectorAll(".add-to-cart").forEach(button => {
       button.addEventListener("click", function (e) {
-        e.preventDefault();
         const form = this.closest("form");
         const quantityInput = form.querySelector("input[name='quantity']");
         const quantity = parseInt(quantityInput.value);
-
-        if (quantity > 0) {
-          cartCount += quantity;
-          localStorage.setItem('cartCount', cartCount);
-          updateCartBadge();
-          alert("Item added to cart!");
-          quantityInput.value = 0;
-
-          const display = form.parentElement.querySelector(".quantity-display");
-          if (display) display.textContent = 0;
-        } else {
+        if (quantity <= 0) {
+          e.preventDefault();
           alert("Please select at least 1 item.");
         }
       });
@@ -126,34 +115,21 @@ while ($row = mysqli_fetch_assoc($result)) {
       display.textContent = quantity;
       input.value = quantity;
     }
-
-    function updateCartBadge() {
-      const badge = document.querySelector(".cart-badge");
-      if (badge) {
-        badge.textContent = cartCount;
-      }
-    }
   </script>
 
-  <!-- Cart Popup HTML -->
+  <!-- Cart Overlay -->
   <div class="cart-overlay" id="cartOverlay" style="display: none;">
     <div class="cart-popup">
       <div class="cart-header">
         <h3>Your Order</h3>
         <button onclick="closeCart()" class="cart-close-btn">&times;</button>
       </div>
-      
 
-      <!-- Ambil data keranjang dari session-->
-     <div class="cart-items">
+      <div class="cart-items">
         <?php if (!empty($cart_items)): ?>
           <?php foreach ($cart_items as $item): ?>
             <div class="cart-item">
-              <img
-                src="../assets/images/<?= htmlspecialchars($item['image']) ?>"
-                class="item-img"
-                alt="<?= htmlspecialchars($item['name']) ?>"
-              >
+              <img src="../assets/images/<?= htmlspecialchars($item['image'] ?? 'default.png') ?>" class="item-img" alt="<?= htmlspecialchars($item['name']) ?>">
               <div class="item-info">
                 <p class="item-name"><?= htmlspecialchars($item['name']) ?></p>
                 <p class="item-price">
@@ -181,7 +157,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     </div>
   </div>
 
-  <!-- Script buka/tutup cart -->
   <script>
     function openCart() {
       document.getElementById('cartOverlay').style.display = 'flex';
@@ -189,18 +164,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     function closeCart() {
       document.getElementById('cartOverlay').style.display = 'none';
     }
-  </script>
-
-  <!-- Padding untuk menghindari tertutup header -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const header = document.querySelector("header");
-      const section = document.querySelector(".menu-section");
-      if (header && section) {
-        const height = header.offsetHeight;
-        section.style.paddingTop = height + 20 + "px";
-      }
-    });
   </script>
 </body>
 </html>
