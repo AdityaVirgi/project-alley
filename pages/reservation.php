@@ -26,7 +26,7 @@ if ($guest_count && $guest_count > 6 && $show_tables) {
   <h2>Reserve a Table</h2>
   <form action="<?= $show_tables ? 'submit_reservation.php' : 'reservation.php?show_tables=1' ?>" method="POST">
     <label for="name">Your Name</label>
-    <input type="text" name="name" id="name" value="<?= $_POST['guest_name'] ?? '' ?>" required>
+    <input type="text" name="name" id="name" value="<?= $_POST['name'] ?? '' ?>" required>
 
     <label for="people">Number of People</label>
     <select name="people" id="people" required>
@@ -37,7 +37,7 @@ if ($guest_count && $guest_count > 6 && $show_tables) {
     </select>
 
     <label for="date">Date</label>
-    <input type="date" name="date" id="date" value="<?= $_POST['reservation_date'] ?? '' ?>" required>
+    <input type="date" name="date" id="date" value="<?= $_POST['date'] ?? '' ?>" required>
 
     <label for="checkin">Check-in Time</label>
     <input type="time" name="checkin" id="checkin" value="<?= $_POST['checkin'] ?? '' ?>" required>
@@ -46,7 +46,7 @@ if ($guest_count && $guest_count > 6 && $show_tables) {
     <input type="time" name="checkout" id="checkout" value="<?= $_POST['checkout'] ?? '' ?>" required>
 
     <label for="dp">Down Payment (DP)</label>
-    <input type="number" name="dp" id="dp" value="<?= $_POST['dp_amount'] ?? '' ?>" step="0.01" required>
+    <input type="number" name="dp" id="dp" value="<?= $_POST['dp'] ?? '' ?>" step="0.01" required>
 
     <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && $guest_count && $show_tables): ?>
       <?php if ($guest_count > 6 && !empty($auto_tables)): ?>
