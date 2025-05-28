@@ -28,6 +28,12 @@ if ($guest_count && $guest_count > 6 && $show_tables) {
     <label for="name">Your Name</label>
     <input type="text" name="name" id="name" value="<?= $_POST['name'] ?? '' ?>" required>
 
+     <label for="email">Email</label>
+    <input type="varchar" name="email" id="email" value="<?= $_POST['email'] ?? '' ?>" required>
+
+    <label for="No_Telp">No Telp</label>
+    <input type="int" name="No_Telp" id="No_Telp" value="<?= $_POST['No_Telp'] ?? '' ?>" required>
+
     <label for="people">Number of People</label>
     <select name="people" id="people" required>
       <option value="">Select</option>
@@ -39,10 +45,10 @@ if ($guest_count && $guest_count > 6 && $show_tables) {
     <label for="date">Date</label>
     <input type="date" name="date" id="date" value="<?= $_POST['date'] ?? '' ?>" required>
 
-    <label for="checkin">Check-in Time</label>
+    <label for="checkin">Check-in Time <span style="font-style: italic; font-size: 0.9em;">( pastikan jam yang dipilih )</span></label>
     <input type="time" name="checkin" id="checkin" value="<?= $_POST['checkin'] ?? '' ?>" required>
 
-    <label for="checkout">Check-out Time</label>
+    <label for="checkout">Check-out Time <span style="font-style: italic; font-size: 0.9em;">( pastikan jam yang dipilih )</span></label>
     <input type="time" name="checkout" id="checkout" value="<?= $_POST['checkout'] ?? '' ?>" required>
 
     <label for="dp">Down Payment (DP)</label>

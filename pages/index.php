@@ -12,10 +12,12 @@
 
       <section class="hero">
       <img src="../assets/images/alley2.png" class="hero-logo">
-      <div class="buttons">
-        <a href="reservation.php" class="btn-primary">Reserve a Table</a>
-        <a href="reservation.php" class="btn-primary">scan qr code</a>
-      </div>
+      <form action="Reservation.php" method="post">
+      <form action="reservation.php" method="post">
+            <button class="add-to-cart">Reservasi</button>
+            <button class="add-to-cart">Scan qr code</button>
+           </form>
+            </form>
     </section>
 
         <section id="menu" class="menu">
