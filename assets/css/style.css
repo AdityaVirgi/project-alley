@@ -802,3 +802,26 @@ footer a {
 .btn-pay:hover {
   background-color: #8bc309;
 }
+
+.floor-plan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.table-btn {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.auto-suggestion ul {
+  list-style: none;
+  padding: 0;
+}
+.auto-suggestion li {
+  margin-bottom: 5px;
+}
