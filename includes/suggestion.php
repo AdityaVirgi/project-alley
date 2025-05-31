@@ -1,22 +1,48 @@
 <?php
-function suggest_table_combination($conn, $guest_count) {
-    $result = mysqli_query($conn, "SELECT id, seats, zone FROM tables WHERE status = 'available' ORDER BY seats ASC, id ASC");
+function suggest_table_combination($conn, $guest_count, $date, $checkin, $checkout) {
+    // Ambil meja yang tidak bentrok dengan reservasi lain
+    $sql = "SELECT id, seats, zone FROM tables 
+            WHERE id NOT IN (
+                SELECT rt.table_id 
+                FROM reservation_tables rt
+                JOIN reservations r ON r.id = rt.reservation_id
+                WHERE r.reservation_date = ? AND (
+                    (? BETWEEN r.checkin AND r.checkout) OR
+                    (? BETWEEN r.checkin AND r.checkout) OR
+                    (r.checkin BETWEEN ? AND ?) OR
+                    (r.checkout BETWEEN ? AND ?)
+                )
+            )
+            ORDER BY seats ASC, id ASC";
+
+    $stmt = $conn->prepare($sql);
+
+    // ✅ PERBAIKAN: Jumlah "s" harus sama dengan jumlah parameter (7)
+    $stmt->bind_param("sssssss", $date, $checkin, $checkout, $checkin, $checkout, $checkin, $checkout);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
     $tables = [];
-    while ($row = mysqli_fetch_assoc($result)) {
+    while ($row = $result->fetch_assoc()) {
         $tables[] = $row;
     }
 
+    $stmt->close();
+
+    // Algoritma cari kombinasi terbaik
     $bestCombo = [];
     $minOverflow = PHP_INT_MAX;
     $minCount = PHP_INT_MAX;
 
     $n = count($tables);
-    $maxComboSize = min(5, $n); // Batas kombinasi maksimal
+    $maxComboSize = min(5, $n); // Batas kombinasi 5 meja maksimal
 
     for ($r = 1; $r <= $maxComboSize; $r++) {
         $combinations = combination($tables, $r);
         foreach ($combinations as $combo) {
             $totalSeats = array_sum(array_column($combo, 'seats'));
+
             if ($totalSeats < $guest_count) continue;
 
             $overflow = $totalSeats - $guest_count;

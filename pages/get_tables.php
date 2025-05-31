@@ -2,18 +2,31 @@
 include '../config/koneksi.php';
 
 $guest_count = isset($_POST['people']) ? intval($_POST['people']) : 0;
+$date = $_POST['date'] ?? '';
+$checkin = $_POST['checkin'] ?? '';
+$checkout = $_POST['checkout'] ?? '';
 
-if (!$guest_count) {
-    echo '<p style="color:red;">Jumlah orang tidak valid.</p>';
+if (!$guest_count || !$date || !$checkin || !$checkout) {
+    echo '<p style="color:red;">Mohon isi jumlah orang, tanggal, dan waktu checkin-checkout.</p>';
     exit;
 }
 
-// Coba cari meja dengan jumlah kursi >= guest_count, urut dari yang paling pas
-$max_seats = 12; // Atur sesuai kapasitas maksimal meja di tempatmu
 $found = false;
+$max_seats = 12;
 
 for ($seats = $guest_count; $seats <= $max_seats; $seats++) {
-    $query = "SELECT * FROM tables WHERE status = 'available' AND seats = $seats ORDER BY zone, id";
+    $query = "SELECT * FROM tables WHERE seats = $seats AND id NOT IN (
+        SELECT rt.table_id 
+        FROM reservation_tables rt
+        JOIN reservations r ON r.id = rt.reservation_id
+        WHERE r.reservation_date = '$date' AND (
+            ('$checkin' BETWEEN r.checkin AND r.checkout) OR
+            ('$checkout' BETWEEN r.checkin AND r.checkout) OR
+            (r.checkin BETWEEN '$checkin' AND '$checkout') OR
+            (r.checkout BETWEEN '$checkin' AND '$checkout')
+        )
+    ) ORDER BY zone, id";
+
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0) {
@@ -31,10 +44,9 @@ for ($seats = $guest_count; $seats <= $max_seats; $seats++) {
     }
 }
 
-// Jika tetap tidak ditemukan, coba gunakan auto-suggestion untuk kombinasi meja (jika guest > 6)
 if (!$found && $guest_count > 6) {
     include '../includes/suggestion.php';
-    $auto_tables = suggest_table_combination($conn, $guest_count);
+    $auto_tables = suggest_table_combination($conn, $guest_count, $date, $checkin, $checkout);
 
     if (!empty($auto_tables)) {
         echo '<div class="auto-suggestion">';
@@ -51,6 +63,6 @@ if (!$found && $guest_count > 6) {
 }
 
 if (!$found) {
-    echo '<p style="color:red;">Tidak ada meja tersedia untuk jumlah orang tersebut.</p>';
+    echo '<p style="color:red;">Tidak ada meja tersedia untuk jumlah orang dan waktu tersebut.</p>';
 }
 ?>

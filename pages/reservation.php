@@ -13,6 +13,7 @@ $show_tables = isset($_GET['show_tables']);
   <title>Reservasi Meja</title>
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
+
 <body>
 <?php include '../includes/header.php'; ?>
 
@@ -45,6 +46,11 @@ $show_tables = isset($_GET['show_tables']);
     <label for="checkout">Jam Check-out</label>
     <input type="time" name="checkout" id="checkout" value="<?= $_POST['checkout'] ?? '' ?>" required>
 
+    <p style="font-size: 0.9em; font-style: italic; color: #666;">
+      * Jam operasional: 08:00 – 22:00
+    </p>
+    
+
     <label for="dp">Down Payment (DP)</label>
     <input type="number" name="dp" id="dp" value="<?= $_POST['dp'] ?? '' ?>" required>
 
@@ -59,55 +65,66 @@ $show_tables = isset($_GET['show_tables']);
 
 <?php include '../includes/footer.php'; ?>
 
-<!-- AJAX Script -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const peopleSelect = document.getElementById("people");
-
-  peopleSelect.addEventListener("change", function () {
-    const guestCount = this.value;
-    if (!guestCount) return;
-
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "get_tables.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        document.getElementById("table-suggestions").innerHTML = xhr.responseText;
-      }
-    };
-    xhr.send("people=" + guestCount);
-  });
-
-  // Trigger langsung saat halaman load ulang
-  if (peopleSelect.value) {
-    peopleSelect.dispatchEvent(new Event('change'));
-  }
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const peopleSelect = document.getElementById("people");
+  const dateInput = document.getElementById("date");
+  const checkinInput = document.getElementById("checkin");
+  const checkoutInput = document.getElementById("checkout");
   const suggestionArea = document.getElementById("table-suggestions");
 
-  peopleSelect.addEventListener("change", function () {
-    const guestCount = parseInt(this.value);
-    if (!guestCount) return;
+  function fetchTables() {
+    const guestCount = peopleSelect.value;
+    const date = dateInput.value;
+    const checkin = checkinInput.value;
+    const checkout = checkoutInput.value;
+
+    if (!guestCount || !date || !checkin || !checkout) return;
 
     fetch("get_tables.php", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: "people=" + guestCount
+      body: `people=${guestCount}&date=${date}&checkin=${checkin}&checkout=${checkout}`
     })
     .then(res => res.text())
     .then(html => {
       suggestionArea.innerHTML = html;
     });
+  }
+
+  [peopleSelect, dateInput, checkinInput, checkoutInput].forEach(el => {
+    el.addEventListener("change", fetchTables);
   });
 });
 </script>
 
+<script>
+document.querySelector("form").addEventListener("submit", function(e) {
+  const checkin = document.getElementById("checkin").value;
+  const checkout = document.getElementById("checkout").value;
+
+  const minTime = "08:00";
+  const maxTime = "22:00";
+
+  if (checkin < minTime || checkin > maxTime) {
+    alert("Jam check-in harus antara 08:00 dan 22:00.");
+    e.preventDefault();
+    return;
+  }
+
+  if (checkout < minTime || checkout > maxTime) {
+    alert("Jam check-out harus antara 08:00 dan 22:00.");
+    e.preventDefault();
+    return;
+  }
+
+  if (checkout <= checkin) {
+    alert("Jam check-out harus lebih dari jam check-in.");
+    e.preventDefault();
+    return;
+  }
+});
+</script>
 
 </body>
 </html>
