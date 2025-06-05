@@ -10,31 +10,43 @@
 <body>
 <?php include '../includes/header.php'; ?>
 
+      
       <section class="hero">
-      <img src="../assets/images/alley2.png" class="hero-logo">
-      <form action="Reservation.php" method="post">
-      <form action="reservation.php" method="post">
-            <button class="add-to-cart">Reservasi</button>
-            <button class="add-to-cart">Scan qr code</button>
-           </form>
-            </form>
-    </section>
+        <img src="../assets/images/alley2.png" class="hero-logo" alt="Alley Logo">
+          <div style="margin-top: 20px;">
+            <button onclick="openModal()" class="add-to-cart">Already Reserved</button>
+            <a href="reservation.php" class="add-to-cart">Not Yet Reserved</a>
+          </div>
+      </section>
 
-        <section id="menu" class="menu">
-      <div class="menu-row">
-        <div class="menu-card">
-          <img src="../assets/images/gambar1.png" alt="Menu 1">
+      <!-- Modal Popup -->
+      <div id="reservationModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h3>Enter Your Reservation Number</h3>
+          <form action="menu.php" method="get">
+            <input type="number" name="reservation_id" id="reservation_id" required placeholder="e.g. 21">
+            <button type="submit" class="btn-success">View Details</button>
+          </form>
         </div>
-        <div class="menu-card">
-          <img src="../assets/images/gambar2.png" alt="Menu 2">
-        </div>
-        <div class="menu-card">
-          <img src="../assets/images/gambar3.png" alt="Menu 3">
-        </div>
-        <div class="menu-card">
-          <img src="../assets/images/gambar4.png" alt="Menu 4">
       </div>
-    </section>
+
+
+      <section id="menu" class="menu">
+        <div class="menu-row">
+          <div class="menu-card">
+            <img src="../assets/images/gambar1.png" alt="Menu 1">
+          </div>
+          <div class="menu-card">
+            <img src="../assets/images/gambar2.png" alt="Menu 2">
+          </div>
+          <div class="menu-card">
+            <img src="../assets/images/gambar3.png" alt="Menu 3">
+          </div>
+          <div class="menu-card">
+            <img src="../assets/images/gambar4.png" alt="Menu 4">
+        </div>
+      </section>
 
 
 
@@ -58,6 +70,33 @@
       </div>
     </div>
   </section>
+
+  <section class="about" id="about" style="text-align: center; padding: 40px 20px;">
+    <h2>About alley.jkt</h2>
+    <p style="max-width: 800px; margin: 0 auto;">
+      alley.jkt is a modern coffee shop dedicated to providing a seamless experience for our customers.
+      Our reservation and ordering system allows you to reserve tables, pre-order menu items, and enjoy your coffee
+      without waiting in line.
+    </p>
+    <a href="about.php" class="btn-primary" style="margin-top: 20px; display: inline-block;">Learn More About Us</a>
+  </section>
+
+
+  <script>
+  function openModal() {
+    document.getElementById("reservationModal").style.display = "block";
+  }
+  function closeModal() {
+    document.getElementById("reservationModal").style.display = "none";
+  }
+  window.onclick = function(event) {
+    const modal = document.getElementById("reservationModal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  }
+  </script>
+
 
   <?php include '../includes/footer.php'; ?>
 

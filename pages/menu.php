@@ -8,10 +8,12 @@ $result = mysqli_query($conn, "SELECT * FROM menu");
 while ($row = mysqli_fetch_assoc($result)) {
   $menus[] = $row;
 }
+$reservation_id = $_GET['reservation_id'] ?? null;
 
 // Ambil cart dari session
 $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,19 +56,23 @@ $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
             <p><?= htmlspecialchars($menu['description']) ?></p>
             <p class="price">Rp <?= number_format($menu['price'], 0, ',', '.') ?></p>
 
-            <div class="quantity-control">
-              <button type="button" onclick="changeQuantity(this, -1)">-</button>
-              <span class="quantity-display">0</span>
-              <button type="button" onclick="changeQuantity(this, 1)">+</button>
-            </div>
+            <?php if ($reservation_id): ?>
+              <div class="quantity-control">
+                <button type="button" onclick="changeQuantity(this, -1)">-</button>
+                <span class="quantity-display">0</span>
+                <button type="button" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+            <?php endif; ?>
+
 
             <form action="add_to_cart.php" method="post">
               <input type="hidden" name="product_id" value="<?= $menu['id'] ?>">
               <input type="hidden" name="quantity" class="quantity-input" value="0">
-              <?php if (isset($_GET['reservation_id'])): ?>
-                <input type="hidden" name="reservation_id" value="<?= htmlspecialchars($_GET['reservation_id']) ?>">
+
+              <?php if ($reservation_id): ?>
+                <input type="hidden" name="reservation_id" value="<?= htmlspecialchars($reservation_id) ?>">
+                <button class="add-to-cart">Add to Cart</button>
               <?php endif; ?>
-              <button class="add-to-cart">Add to Cart</button>
             </form>
           </div>
         </div>
