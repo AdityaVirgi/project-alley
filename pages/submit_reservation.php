@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validasi input wajib
     if (
-        empty($_POST['name']) || empty($_POST['people']) || empty($_POST['date']) ||
+        empty($_POST['name']) || empty($_POST['email']) || empty($_POST['No_Telp']) || empty($_POST['people']) || empty($_POST['date']) ||
         empty($_POST['checkin']) || empty($_POST['checkout']) || empty($_POST['dp']) ||
         !isset($_POST['table_ids']) || count($_POST['table_ids']) == 0
     ) {
@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Ambil data dari form
     $name     = $_POST['name'];
+    $email     = $_POST['email'];
+    $notelp     = $_POST['No_Telp'];
     $people   = intval($_POST['people']);
     $date     = $_POST['date'];
     $checkin  = $_POST['checkin'];
@@ -40,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Simpan data ke tabel 'reservations'
-    $stmt = $conn->prepare("INSERT INTO reservations (guest_name, people, reservation_date, checkin, checkout, dp_amount, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->bind_param("sisssd", $name, $people, $date, $checkin, $checkout, $dp);
+    $stmt = $conn->prepare("INSERT INTO reservations (guest_name, email, No_Telp, people, reservation_date, checkin, checkout, dp_amount, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+    $stmt->bind_param("sssisssd", $name, $email, $notelp, $people, $date, $checkin, $checkout, $dp);
 
     if (!$stmt->execute()) {
         echo "Gagal menyimpan reservasi utama: " . $stmt->error;
