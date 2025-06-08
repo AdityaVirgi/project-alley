@@ -15,6 +15,18 @@ header {
   border-bottom: 1px solid #ddd;
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h3 {
+  margin: 0;
+}
+
+
 nav a {
   margin: 0 10px;
   text-decoration: none;
@@ -885,4 +897,458 @@ footer a {
 
 .modal-content {
   border: 2px solid red;
+}
+
+/* ====== DASHBOARD LAYOUT STYLE ====== */
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px 0;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #443322;
+}
+
+.nav a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.nav .order-btn {
+  background-color: #5c3d2e;
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+}
+
+.dashboard-title {
+  margin-bottom: 20px;
+}
+
+.cards_dash {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.card_dash {
+  flex: 1 1 calc(25% - 20px); /* 4 kolom */
+  background: linear-gradient(to right, #fff9f0, #fef5ed);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.card_dash:hover {
+  transform: translateY(-4px);
+}
+
+.card_dash h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.card_dash .amount {
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
+}
+
+.recent-orders {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+}
+
+.recent-orders h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.recent-orders table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recent-orders table th,
+.recent-orders table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  text-align: left;
+}
+
+.recent-orders table th {
+  background-color: #f5f5f5;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.badge.pending {
+  background-color: #f39c12;
+}
+
+.badge.ready {
+  background-color: #27ae60;
+}
+
+.badge.served {
+  background-color: #9b59b6;
+}
+
+.badge.completed {
+  background-color: #3498db;
+}
+
+.charts {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.chart-box {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/*MASTER MENU*/
+.header-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #4b2e2e;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tab-menu {
+  display: flex;
+  border-radius: 8px;
+  background-color: #e6dfd6;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.tab-menu button {
+  flex: 1;
+  padding: 12px 0;
+  border: none;
+  background: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #4b2e2e;
+  transition: background-color 0.3s;
+}
+
+.tab-menu button.active,
+.tab-menu button:hover {
+  background-color: #d2c5ba;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #3b2c2c;
+}
+
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-top: 20px;
+}
+
+.menu-table th,
+.menu-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.menu-table th {
+  background-color: #f3f0ec;
+  color: #3b3b3b;
+  font-size: 15px;
+}
+
+.menu-table td {
+  font-size: 14px;
+  color: #444;
+}
+
+.menu-table img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.price-cell {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.actions a {
+  color: inherit;           /* Gunakan warna teks induk (tidak biru) */
+  text-decoration: none;    /* Hilangkan underline */
+  font-size: 16px;
+  padding: 4px;
+}
+
+.actions a:hover {
+  color: #6b4f2e;           /* Warna saat hover (opsional) */
+}
+
+
+.actions button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.actions .edit {
+  color: #007B8A;
+}
+
+.actions .delete {
+  color: #E53935;
+}
+
+.add-btn {
+  margin-top: 20px;
+  padding: 10px 18px;
+  background-color: #6b4f2e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.add-btn:hover {
+  background-color: #5b4123;
+}
+
+
+.modal-edit-table {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-edit-content {
+      background-color: #fff;
+      margin: 80px auto;
+      padding :40px;
+      padding-right: 50px;
+      border-radius: 10px;
+      max-width: 400px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .modal-edit-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #4b2e2e;
+    }
+    .modal-edit-table label {
+      display: block;
+      margin: 10px 0 6px;
+      font-weight: bold;
+      color: #333;
+    }
+    .modal-edit-table input[type="text"],
+    .modal-edit-table input[type="number"],
+    .modal-edit-table select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .modal-edit-actions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-edit-save-btn {
+      background-color: #6b4f2e;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .modal-edit-save-btn:hover {
+      background-color: #5b4123;
+    }
+    .modal-edit-cancel-link {
+      color: #6b4f2e;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .modal-edit-close {
+      float: right;
+      font-size: 22px;
+      cursor: pointer;
+      margin-top: -10px;
+      margin-right: -10px;
+    }
+
+.modal-edit-reservation {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding :40px;
+  padding-right: 50px;
+  margin: 80px auto;
+}
+
+.modal-edit-reservation-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 24px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 60vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal-edit-reservation-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #4b2e2e;
+  text-align: center;
+}
+
+.modal-edit-reservation-content label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+.modal-edit-reservation-content input,
+.modal-edit-reservation-content select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-edit-reservation-actions {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.modal-edit-reservation-save-btn {
+  background-color: #6b4f2e;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.modal-edit-reservation-save-btn:hover {
+  background-color: #5b4123;
+}
+
+.modal-edit-reservation-cancel-link {
+  margin-left: 10px;
+  color: #6b4f2e;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.modal-edit-reservation-close {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+}
+.modal-edit-reservation-close:hover {
+  color: #333;
 }

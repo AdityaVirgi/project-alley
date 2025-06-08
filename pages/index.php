@@ -10,7 +10,6 @@
 <body>
 <?php include '../includes/header.php'; ?>
 
-      
       <section class="hero">
         <img src="../assets/images/alley2.png" class="hero-logo" alt="Alley Logo">
           <div style="margin-top: 20px;">
@@ -68,6 +67,16 @@
         <p>Explore our handcrafted coffee drinks and delicious food items.</p>
         <a href="menu.php" class="btn-primary">Get Started</a>
       </div>
+      <div class="card">
+        <h3>📊 Dashboard</h3>
+        <p>Management dashboard with analytics and operational insights.</p>
+        <a href="dashboard.php" class="btn-primary">Get Started</a>
+      </div>
+      <div class="card">
+        <h3>📊 Master Data</h3>
+        <p>Manage menu items, tables, and other data for the coffee shop.</p>
+        <a href="md_item.php" class="btn-primary">Get Started</a>
+      </div>
     </div>
   </section>
 
@@ -80,7 +89,6 @@
     </p>
     <a href="about.php" class="btn-primary" style="margin-top: 20px; display: inline-block;">Learn More About Us</a>
   </section>
-
 
   <script>
   function openModal() {
