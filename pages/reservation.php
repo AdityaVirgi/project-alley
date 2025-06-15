@@ -49,10 +49,11 @@ $show_tables = isset($_GET['show_tables']);
     <p style="font-size: 0.9em; font-style: italic; color: #666;">
       * Jam operasional: 08:00 – 22:00
     </p>
-    
 
     <label for="dp">Down Payment (DP)</label>
     <input type="number" name="dp" id="dp" value="<?= $_POST['dp'] ?? '' ?>" required>
+    
+
 
     <!-- Tempat AJAX akan tampilkan hasil -->
     <div id="table-suggestions">

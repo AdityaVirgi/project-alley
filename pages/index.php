@@ -12,23 +12,26 @@
 
       <section class="hero">
         <img src="../assets/images/alley2.png" class="hero-logo" alt="Alley Logo">
-          <div style="margin-top: 20px;">
-            <button onclick="openModal()" class="add-to-cart">Already Reserved</button>
-            <a href="reservation.php" class="add-to-cart">Not Yet Reserved</a>
-          </div>
+        <div class="buttons">
+          <button onclick="openModal()">Already Reserved</button>
+          <button onclick="window.location.href='reservation.php'">Not Yet Reserved</button>
+        </div>
       </section>
+
 
       <!-- Modal Popup -->
       <div id="reservationModal" class="modal">
         <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
           <h3>Enter Your Reservation Number</h3>
-          <form action="menu.php" method="get">
-            <input type="number" name="reservation_id" id="reservation_id" required placeholder="e.g. 21">
+          <form action="order_confirmation.php" method="get">
+            <input type="text" name="reservation_id" id="reservation_id" required placeholder="e.g. 21">
             <button type="submit" class="btn-success">View Details</button>
           </form>
         </div>
       </div>
+
+
 
 
       <section id="menu" class="menu">
@@ -52,6 +55,7 @@
   <section class="services">
     <h2>Our Services</h2>
     <div class="service-cards">
+      <?php if (!isset($_SESSION['user'])): ?>
       <div class="card">
         <h3>📅 Table Reservation</h3>
         <p>Reserve your favorite spot in our coffee shop and order in advance.</p>
@@ -67,17 +71,22 @@
         <p>Explore our handcrafted coffee drinks and delicious food items.</p>
         <a href="menu.php" class="btn-primary">Get Started</a>
       </div>
+    <?php endif; ?>
+
+      <?php if (isset($_SESSION['user'])): ?>
       <div class="card">
         <h3>📊 Dashboard</h3>
         <p>Management dashboard with analytics and operational insights.</p>
         <a href="dashboard.php" class="btn-primary">Get Started</a>
       </div>
       <div class="card">
-        <h3>📊 Master Data</h3>
+        <h3>📦 Master Data</h3>
         <p>Manage menu items, tables, and other data for the coffee shop.</p>
-        <a href="md_item.php" class="btn-primary">Get Started</a>
+        <a href="../masterdata/md_item.php" class="btn-primary">Get Started</a>
       </div>
-    </div>
+      <?php endif; ?>
+
+
   </section>
 
   <section class="about" id="about" style="text-align: center; padding: 40px 20px;">

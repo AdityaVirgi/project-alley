@@ -38,13 +38,15 @@ $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
       </a>
     </div>
 
-    <div class="menu-filters">
-      <button class="filter-btn" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="coffee">Coffee</button>
-      <button class="filter-btn" data-filter="non-coffee">Non-Coffee</button>
-      <button class="filter-btn" data-filter="pastry">Pastry</button>
-      <button class="filter-btn" data-filter="food">Food</button>
-      <button class="filter-btn" data-filter="dessert">Dessert</button>
+    <div class="container-tabmenu">
+      <div class="tab-menu">
+        <button class="filter-btn" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="coffee">Coffee</button>
+        <button class="filter-btn" data-filter="non-coffee">Non-Coffee</button>
+        <button class="filter-btn" data-filter="pastry">Pastry</button>
+        <button class="filter-btn" data-filter="food">Food</button>
+        <button class="filter-btn" data-filter="dessert">Dessert</button>
+      </div>
     </div>
 
     <div class="menu-items">
