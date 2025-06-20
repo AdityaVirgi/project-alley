@@ -116,7 +116,7 @@ $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
       </div>
 
       <div class="cart-footer" style="<?= empty($cart_items) ? 'display:none;' : '' ?>">
-        <form action="order_confirmation.php" method="post">
+        <form action="save_order.php" method="get">
           <input type="hidden" name="reservation_id" value="<?= $_GET['reservation_id'] ?? 0 ?>">
           <button type="submit" class="btn-checkout">Checkout</button>
         </form>

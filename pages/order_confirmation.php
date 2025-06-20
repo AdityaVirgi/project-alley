@@ -13,7 +13,7 @@ include '../config/koneksi.php';
 Xendit::setApiKey('xnd_development_KNfmhtqrPrA68MrB068bbtPju6g9pI4Htpx4xkyOqGIYRSNIDfKxbMw9HohHReJ');
 
 
-echo "Xendit class loaded successfully!";
+//echo "Xendit class loaded successfully!";
 
 
 $cart = $_SESSION['cart'] ?? [];
@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $status === 'pending') {
         exit;
     }
 }
+
 
 ?>
 
